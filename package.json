@@ -19,6 +19,7 @@
   "homepage": "https://github.com/Ajololr/Vidly-JS#readme",
   "dependencies": {
     "express": "^4.17.1",
-    "joi": "^17.2.1"
+    "joi": "^17.2.1",
+    "mongoose": "^5.10.7"
   }
 }

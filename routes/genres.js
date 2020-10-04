@@ -1,30 +1,19 @@
 const express = require("express");
 const Joi = require("joi");
-
+const mogoose = require("mongoose");
 const router = express.Router();
 
-const ganres = [
-  {
-    id: 1,
-    name: "action",
-  },
-  {
-    id: 2,
-    name: "romantic",
-  },
-  {
-    id: 3,
-    name: "comedy",
-  },
-  {
-    id: 4,
-    name: "drama",
-  },
-  {
-    id: 5,
-    name: "fantasy",
-  },
-];
+const Ganre = mogoose.model(
+  "Ganre",
+  new mogoose.Schema({
+    name: {
+      type: String,
+      required: true,
+      minlength: 5,
+      maxlength: 50,
+    },
+  })
+);
 
 function validateGanre(ganre) {
   const schema = Joi.object({
@@ -36,65 +25,62 @@ function validateGanre(ganre) {
   return res;
 }
 
-router.get("/", (req, res) => {
+router.get("/", async (req, res) => {
+  const ganres = await Ganre.find();
   res.send(ganres);
 });
 
-router.get("/:id", (req, res) => {
-  const ganre = ganres.find((item) => item.id === parseInt(req.params.id));
+router.get("/:id", async (req, res) => {
+  const ganre = await Ganre.findById(req.params.id);
 
-  if (!ganre) {
-    res.status(404).send("No ganre with the given id");
-    return;
-  }
+  if (!ganre) return res.status(404).send("No ganre with the given id");
+
   res.send(ganre);
 });
 
-router.post("/", (req, res) => {
+router.post("/", async (req, res) => {
   const { error } = validateGanre(req.body);
   if (error) {
     res.status(400).send(error.message);
     return;
   }
 
-  const ganre = {
-    id: ganres.length + 1,
+  const ganre = new Ganre({
     name: req.body.name,
-  };
-  ganres.push(ganre);
-  res.send(ganre);
+  });
+  const result = await ganre.save();
+
+  res.send(result);
 });
 
-router.put("/:id", (req, res) => {
-  const ganre = ganres.find((item) => item.id === parseInt(req.params.id));
-
-  if (!ganre) {
-    res.status(404).send("No ganre with the given id");
-    return;
-  }
-
+router.put("/:id", async (req, res) => {
   const { error } = validateGanre(req.body);
-  if (error) {
-    res.status(400).send(error.message);
-    return;
-  }
+  if (error) return res.status(400).send(error.message);
 
-  ganre.name = req.body.name;
-  res.send(ganre);
+  try {
+    const ganre = await Ganre.findByIdAndUpdate(
+      req.params.id,
+      {
+        name: req.body.name,
+      },
+      {
+        new: true,
+        useFindAndModify: false,
+      }
+    );
+    res.send(ganre);
+  } catch (ex) {
+    return res.status(404).send("No ganre with the given id");
+  }
 });
 
-router.delete("/:id", (req, res) => {
-  const ganre = ganres.find((item) => item.id === parseInt(req.params.id));
-
-  if (!ganre) {
-    res.status(404).send("No ganre with the given id");
-    return;
+router.delete("/:id", async (req, res) => {
+  try {
+    const ganre = await Ganre.findByIdAndDelete(req.params.id);
+    res.send(ganre);
+  } catch (ex) {
+    return res.status(404).send("No ganre with the given id");
   }
-
-  const index = ganres.indexOf(ganre);
-  ganres.splice(index, 1);
-
-  res.send(ganre);
 });
 
 module.exports = router;
