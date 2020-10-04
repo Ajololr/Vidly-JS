@@ -1,6 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const ganres = require("./routes/genres");
+const customers = require("./routes/customers");
 const app = express();
 
 mongoose
@@ -13,6 +14,7 @@ mongoose
 
 app.use(express.json());
 app.use("/api/ganres", ganres);
+app.use("/api/customers", customers);
 app.get("/", (req, res) => {
   res.send("Hello World!!!");
 });
