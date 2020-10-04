@@ -1,64 +1,41 @@
+const { Genre, validateGenre } = require("../models/genre");
 const express = require("express");
-const Joi = require("joi");
-const mogoose = require("mongoose");
 const router = express.Router();
 
-const Ganre = mogoose.model(
-  "Ganre",
-  new mogoose.Schema({
-    name: {
-      type: String,
-      required: true,
-      minlength: 5,
-      maxlength: 50,
-    },
-  })
-);
-
-function validateGanre(ganre) {
-  const schema = Joi.object({
-    name: Joi.string().min(3).required(),
-  });
-
-  const res = schema.validate(ganre);
-
-  return res;
-}
-
 router.get("/", async (req, res) => {
-  const ganres = await Ganre.find();
-  res.send(ganres);
+  const genres = await Genre.find();
+  res.send(genres);
 });
 
 router.get("/:id", async (req, res) => {
-  const ganre = await Ganre.findById(req.params.id);
+  const ganre = await Genre.findById(req.params.id);
 
-  if (!ganre) return res.status(404).send("No ganre with the given id");
+  if (!ganre) return res.status(404).send("No genre with the given id");
 
   res.send(ganre);
 });
 
 router.post("/", async (req, res) => {
-  const { error } = validateGanre(req.body);
+  const { error } = validateGenre(req.body);
   if (error) {
     res.status(400).send(error.message);
     return;
   }
 
-  const ganre = new Ganre({
+  const genre = new Genre({
     name: req.body.name,
   });
-  const result = await ganre.save();
+  const result = await genre.save();
 
   res.send(result);
 });
 
 router.put("/:id", async (req, res) => {
-  const { error } = validateGanre(req.body);
+  const { error } = validateGenre(req.body);
   if (error) return res.status(400).send(error.message);
 
   try {
-    const ganre = await Ganre.findByIdAndUpdate(
+    const genre = await Genre.findByIdAndUpdate(
       req.params.id,
       {
         name: req.body.name,
@@ -68,18 +45,18 @@ router.put("/:id", async (req, res) => {
         useFindAndModify: false,
       }
     );
-    res.send(ganre);
+    res.send(genre);
   } catch (ex) {
-    return res.status(404).send("No ganre with the given id");
+    return res.status(404).send("No genre with the given id");
   }
 });
 
 router.delete("/:id", async (req, res) => {
   try {
-    const ganre = await Ganre.findByIdAndDelete(req.params.id);
-    res.send(ganre);
+    const genre = await Genre.findByIdAndDelete(req.params.id);
+    res.send(genre);
   } catch (ex) {
-    return res.status(404).send("No ganre with the given id");
+    return res.status(404).send("No genre with the given id");
   }
 });
 
