@@ -19,6 +19,7 @@
   "homepage": "https://github.com/Ajololr/Vidly-JS#readme",
   "dependencies": {
     "bcrypt": "^5.0.0",
+    "config": "^3.3.2",
     "express": "^4.17.1",
     "joi": "^17.2.1",
     "joi-objectid": "^3.0.1",

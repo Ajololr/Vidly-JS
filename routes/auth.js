@@ -2,6 +2,7 @@ const { User } = require("../models/user");
 const Joi = require("joi");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const config = require("config");
 const express = require("express");
 const router = express.Router();
 
@@ -17,7 +18,7 @@ router.post("/login", async (req, res) => {
 
   const token = jwt.sign({
     _id: user._id
-  }, "PrivateKey");
+  }, config.get("jwtPrivateKey"));
 
   res.send(token);
 });
