@@ -21,7 +21,9 @@ router.post("/register", async (req, res) => {
 
   const result = await user.save();
 
-  res.send({
+  const token = user.generateAuthToken();
+
+  res.header("x-auth-token", token).send({
     name: result.name,
     email: result.email
   });
