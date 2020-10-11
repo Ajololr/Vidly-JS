@@ -1,3 +1,4 @@
 {
-  "jwtPrivateKey": ""
+  "jwtPrivateKey": "default_private_jwt_key",
+  "PORT": 4000
 }
