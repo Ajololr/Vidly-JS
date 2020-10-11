@@ -1,5 +1,6 @@
-const Joi = require("joi");
+require("express-async-errors");
 Joi.objectId = require("joi-objectid")(Joi);
+const Joi = require("joi");
 const config = require("config");
 const express = require("express");
 const mongoose = require("mongoose");
@@ -8,6 +9,7 @@ const customers = require("./routes/customers");
 const movies = require("./routes/movies");
 const users = require("./routes/users");
 const auth = require("./routes/auth");
+const error = require("./middleware/error");
 const app = express();
 
 if(!config.get("jwtPrivateKey")) {
@@ -29,6 +31,9 @@ app.use("/api/customers", customers);
 app.use("/api/movies", movies);
 app.use("/api/users", users);
 app.use("/api/auth", auth);
+
+app.use(error);
+
 app.get("/", (req, res) => {
   res.send("Hello World!!!");
 });
