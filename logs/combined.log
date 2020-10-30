@@ -55,3 +55,22 @@
 {"message":"Connected to mongodb://localhost/vidly...","level":"info"}
 {"message":"Listening on port 4000...","level":"info"}
 {"message":"Connected to mongodb://localhost/vidly...","level":"info"}
+{"message":"Listening on port 4000...","level":"info"}
+{"message":"Connected to mongodb://localhost/vidly...","level":"info"}
+{"message":"Listening on port 4000...","level":"info"}
+{"message":"Connected to mongodb://localhost/vidly...","level":"info"}
+{"message":"Listening on port 4000...","level":"info"}
+{"message":"Connected to mongodb://localhost/vidly...","level":"info"}
+{"message":"Listening on port 4000...","level":"info"}
+{"message":"Connected to mongodb://localhost/vidly...","level":"info"}
+{"errors":{"name":{"name":"ValidatorError","message":"Path `name` (`1234`) is shorter than the minimum allowed length (5).","properties":{"message":"Path `name` (`1234`) is shorter than the minimum allowed length (5).","type":"minlength","minlength":5,"path":"name","value":"1234"},"kind":"minlength","path":"name","value":"1234"}},"_message":"Genre validation failed","level":"error","message":"Genre validation failed: name: Path `name` (`1234`) is shorter than the minimum allowed length (5). Genre validation failed: name: Path `name` (`1234`) is shorter than the minimum allowed length (5).","stack":"ValidationError: Genre validation failed: name: Path `name` (`1234`) is shorter than the minimum allowed length (5).\n    at model.Object.<anonymous>.Document.invalidate (E:\\Work\\Vidly-JS\\node_modules\\mongoose\\lib\\document.js:2625:32)\n    at E:\\Work\\Vidly-JS\\node_modules\\mongoose\\lib\\document.js:2445:17\n    at E:\\Work\\Vidly-JS\\node_modules\\mongoose\\lib\\schematype.js:1225:9\n    at processTicksAndRejections (internal/process/task_queues.js:75:11)"}
+{"message":"Listening on port 4000...","level":"info"}
+{"message":"Connected to mongodb://localhost/vidly...","level":"info"}
+{"message":"Listening on port 4000...","level":"info"}
+{"message":"Connected to mongodb://localhost/vidly...","level":"info"}
+{"message":"Listening on port 4000...","level":"info"}
+{"message":"Connected to mongodb://localhost/vidly...","level":"info"}
+{"message":"Listening on port 4000...","level":"info"}
+{"message":"Connected to mongodb://localhost/vidly...","level":"info"}
+{"message":"Listening on port 4000...","level":"info"}
+{"message":"Connected to mongodb://localhost/vidly...","level":"info"}
