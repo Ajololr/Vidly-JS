@@ -10,4 +10,8 @@ require("./startup/config")();
 require("./startup/validation")();
 
 const PORT = config.get("PORT");
-app.listen(PORT, () => winston.info(`Listening on port ${PORT}...`));
+const server = app.listen(PORT, () =>
+  winston.info(`Listening on port ${PORT}...`)
+);
+
+module.exports = server;
