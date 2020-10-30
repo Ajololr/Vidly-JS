@@ -3,13 +3,14 @@ const express = require("express");
 const auth = require("../middleware/auth");
 const admin = require("../middleware/admin");
 const router = express.Router();
+const validateObjectId = require("../middleware/validateObjectId");
 
 router.get("/", async (req, res) => {
   const genres = await Genre.find();
   res.send(genres);
 });
 
-router.get("/:id", async (req, res) => {
+router.get("/:id", validateObjectId, async (req, res) => {
   const ganre = await Genre.findById(req.params.id);
 
   if (!ganre) return res.status(404).send("No genre with the given id");
