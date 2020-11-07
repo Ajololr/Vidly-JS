@@ -4,7 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "jest --watchAll --verbose --runInBand --coverage"
+    "test": "jest --watchAll --verbose --runInBand --coverage",
+    "start": "node --no-deprecation index.js"
+  },
+  "engines": {
+    "node": "14.7.0"
   },
   "repository": {
     "type": "git",
