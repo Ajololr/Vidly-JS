@@ -4,6 +4,7 @@ const config = require("config");
 
 module.exports = function () {
   const dbUrl = config.get("db");
+  console.log("DB url:", dbUrl);
   mongoose
     .connect(dbUrl, {
       useNewUrlParser: true,

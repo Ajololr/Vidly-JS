@@ -11,6 +11,7 @@ require("./startup/validation")();
 require("./startup/prod")(app);
 
 const PORT = config.get("PORT");
+console.log("PORT:", PORT);
 const server = app.listen(PORT, () =>
   winston.info(`Listening on port ${PORT}...`)
 );
